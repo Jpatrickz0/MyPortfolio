@@ -51,9 +51,9 @@ export const profile = {
 /** About Me — "Memory 01 — Origins" */
 export const about = {
   paragraphs: [
-    "I'm Jan Patrick Ramirez — a multidisciplinary creator exploring the space where design, development, ecommerce, and marketing meet.",
-    "What started as curiosity about how things are made online turned into a craft: designing brands in Photoshop, cutting stories in Premiere Pro, building fast websites, and growing stores with Shopify and Klaviyo.",
-    "I think of every project as a memory worth building well — something that performs, lasts, and is genuinely good to experience.",
+    "Hi, I'm Jan Patrick Ramirez.",
+    "I enjoy creating and improving digital experiences. From building websites and Shopify stores to designing graphics and editing videos, I like turning ideas into something people can see, use, and enjoy.",
+    "I'm always learning, exploring new tools, and finding better ways to create meaningful digital experiences.",
   ],
   values: [
     "Craft over shortcuts",
