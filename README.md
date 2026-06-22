@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Jan Patrick Ramirez — Portfolio
 
-## Getting Started
+A premium, **single-page** portfolio built around a creative concept —
+**"Memory Architecture"**: the site is a curated digital archive of a
+multidisciplinary creator's experiences, projects, skills, and milestones.
+Sections are framed as numbered "memories," and a loading animation indexes the
+archive before it opens.
 
-First, run the development server:
+> Concept, strategy, and the full design system are documented in
+> **[STRATEGY.md](STRATEGY.md)**.
+
+## Stack
+
+- **Next.js 14** (App Router) + **TypeScript**
+- **Tailwind CSS** + **shadcn/ui** (Radix primitives, incl. Dialog)
+- **Framer Motion** (animation) + **Lenis** (smooth scroll)
+- **react-icons** (brand/tech badges) + **Lucide** (UI icons)
+- **React Hook Form** + **Zod** (lead form) · **Zustand** · **Sonner**
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm start        # serve the production build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> Tip: don't run `npm run build` while `npm run dev` is running — they share the
+> `.next` folder. Stop dev first, or delete `.next` if the dev server looks
+> broken after a build.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ✏️ Editing content (no code required)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Everything you'll change lives in **`src/content/`**, one file per area. See
+**[`src/content/README.md`](src/content/README.md)** for the full guide.
 
-## Learn More
+| File | Controls |
+|------|----------|
+| `profile.ts` | Name, brand/tagline, disciplines, contact, socials, portrait path, About story |
+| `sections.ts` | Section titles ("Memory 01 — Origins" …) + nav labels |
+| `experience.ts` | Timeline entries |
+| `projects.ts` | Vault projects + each case-study modal |
+| `skills.ts` | Tool badges (brand icons or 2-letter monograms) |
+| `testimonials.ts` | Client quotes |
 
-To learn more about Next.js, take a look at the following resources:
+## Images
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Files in `public/` are served from the site root — see
+[`public/images/README.md`](public/images/README.md) for the full guide.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Your photo (hero centerpiece):** `public/images/portrait.png` — a
+  **background-removed PNG** is best; you appear as a centered cutout in front
+  of your name. Referenced as `/images/portrait.png` (set in `profile.ts`).
+- **Project images:** `public/images/projects/<slug>/cover.jpg` and
+  `01.jpg`, `02.jpg`, … — your long Figma mockups appear in the case-study
+  modal (set in `projects.ts`).
 
-## Deploy on Vercel
+Missing images show a styled placeholder, so the site always looks finished.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Key UX decisions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Hero is a centered cinematic poster** — your cutout photo stands in the
+  middle, in front of your name set huge behind you; everything animates in on
+  load (name lines rise, figure emerges, spotlight blooms). No frame, not a
+  side layout. A silhouette placeholder stands in until you add your photo.
+- **Projects open a case-study modal** (`Dialog`) with a scrollable gallery —
+  the right home for long mockups instead of dumping them on the page. (Prefer
+  dedicated pages? Each project has a `slug` ready to become a route.)
+- **Skills are visual badges** (icons + monograms), grouped by discipline.
+- **Center-aligned timeline** with a scroll-linked growing line and entries
+  that reveal progressively.
+
+## Hide the testimonials section
+
+In `src/app/page.tsx`, comment out / delete the single `<Testimonials />` line
+(it's clearly marked).
+
+## Concept components
+
+- `site/loader.tsx` — "indexing the archive" loader (fail-open: skips for
+  reduced-motion, revisits, and background tabs so content is never blocked).
+- `site/portrait.tsx` / `site/smart-image.tsx` — images with focus-pull reveal
+  and graceful placeholders.
+- `motion/reveal.tsx` — `Reveal`, `StaggerGroup`, `FocusReveal`, `WordsReveal`.
+- All motion respects `prefers-reduced-motion`. No cursor-following element.
+
+## Wire the lead form
+
+The form posts to `src/app/api/lead/route.ts`, which validates and logs the
+submission. Replace the `TODO` with an email/CRM integration (e.g. Resend).
+
+## Before launch
+
+- Add `public/images/portrait.jpg` + project images.
+- Set `profile.url` and `profile.calendar`.
+- Connect the lead form to email/CRM; add an OG image + favicon.
+- Replace placeholder experience / projects / testimonials with real ones.
+- Deploy (Vercel recommended).
