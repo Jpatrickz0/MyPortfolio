@@ -4,16 +4,55 @@ import { useEffect, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
 import { projects, sections, type Project } from "@/content";
+import { cn } from "@/lib/utils";
 import { startLenis, stopLenis } from "@/lib/lenis";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 import { SmartImage } from "@/components/site/smart-image";
+import { MobileMockup } from "@/components/site/mobile-mockup";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
 } from "@/components/ui/dialog";
+import type { IconType } from "react-icons";
+import {
+  SiFigma,
+  SiShopify,
+  SiCanva,
+  SiReact,
+  SiNextdotjs,
+  SiTypescript,
+  SiTailwindcss,
+  SiNodedotjs,
+  SiFlutter,
+  SiDart,
+} from "react-icons/si";
+
+// Brand icons by tech name (case-insensitive). Add new tools here.
+const TECH_ICONS: Record<string, IconType> = {
+  figma: SiFigma,
+  shopify: SiShopify,
+  canva: SiCanva,
+  react: SiReact,
+  "next.js": SiNextdotjs,
+  typescript: SiTypescript,
+  "tailwind css": SiTailwindcss,
+  "node.js": SiNodedotjs,
+  flutter: SiFlutter,
+  dart: SiDart,
+};
+
+// 2-letter fallback for tools without a brand icon (e.g. Adobe apps).
+const TECH_MONO: Record<string, string> = {
+  photoshop: "Ps",
+  "premiere pro": "Pr",
+  "after effects": "Ae",
+  lightroom: "Lr",
+  capcut: "Cc",
+  klaviyo: "Kl",
+};
 
 export function Projects() {
   const [active, setActive] = useState<Project | null>(null);
@@ -51,7 +90,10 @@ export function Projects() {
                     accent={p.accent}
                     label={p.title}
                     className="absolute inset-0 h-full w-full"
-                    imgClassName="transition-transform duration-700 group-hover:scale-105"
+                    imgClassName={cn(
+                      "transition-transform duration-700 group-hover:scale-105",
+                      p.coverFit === "contain" && "!object-contain p-10"
+                    )}
                   />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/90 via-background/20 to-background/30" />
 
@@ -104,7 +146,25 @@ function ProjectView({ project }: { project: Project }) {
       </div>
 
       <div className="p-6 sm:p-8">
-        {project.embedUrl ? (
+        {project.device === "phone" ? (
+          /* Mobile app — show the screens as phone mockups */
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3">
+            {(project.screens ??
+              ([{ src: project.cover }] as {
+                src?: string;
+                label?: string;
+              }[])
+            ).map((s, i) => (
+              <MobileMockup
+                key={i}
+                src={s.src}
+                alt={`${project.title} — ${s.label ?? `screen ${i + 1}`}`}
+                accent={project.accent}
+                label={s.label}
+              />
+            ))}
+          </div>
+        ) : project.embedUrl ? (
           /* Optional: live Figma embed (heavier — opt-in per project) */
           <div className="overflow-hidden rounded-xl border border-border bg-background">
             <iframe
@@ -123,8 +183,15 @@ function ProjectView({ project }: { project: Project }) {
               alt={project.title}
               accent={project.accent}
               label={project.title}
-              className="min-h-[300px] w-full rounded-xl border border-border"
-              imgClassName="!h-auto"
+              className={cn(
+                "w-full rounded-xl border border-border",
+                project.coverFit === "contain"
+                  ? "aspect-video"
+                  : "min-h-[300px]"
+              )}
+              imgClassName={
+                project.coverFit === "contain" ? "!object-contain p-10" : "!h-auto"
+              }
             />
             {project.mockups?.map((src, i) => (
               <SmartImage
@@ -174,6 +241,37 @@ function ProjectView({ project }: { project: Project }) {
                   {para}
                 </p>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tech stack / tools used */}
+        {project.tech && project.tech.length > 0 && (
+          <div className="mt-8">
+            <p className="font-mono text-xs uppercase tracking-[0.2em] text-brand">
+              Tools used
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {project.tech.map((t) => {
+                const key = t.toLowerCase();
+                const Icon = TECH_ICONS[key];
+                const mono = TECH_MONO[key];
+                return (
+                  <span
+                    key={t}
+                    className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-4 py-2 text-sm text-foreground"
+                  >
+                    {Icon ? (
+                      <Icon className="size-4 text-brand" />
+                    ) : mono ? (
+                      <span className="font-display text-sm font-semibold leading-none text-brand">
+                        {mono}
+                      </span>
+                    ) : null}
+                    {t}
+                  </span>
+                );
+              })}
             </div>
           </div>
         )}

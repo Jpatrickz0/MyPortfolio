@@ -1,8 +1,31 @@
+"use client";
+
+import { motion, useReducedMotion, type Variants } from "framer-motion";
+
 import { skillCategories, sections } from "@/content";
-import { StaggerGroup, StaggerItem } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/site/section-heading";
 
+const container: Variants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.05 } },
+};
+
 export function Skills() {
+  const reduce = useReducedMotion();
+
+  // Springy pop-in for each badge (opacity-only when reduced motion).
+  const item: Variants = {
+    hidden: reduce ? { opacity: 0 } : { opacity: 0, y: 16, scale: 0.9 },
+    show: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: reduce
+        ? { duration: 0.3 }
+        : { type: "spring", stiffness: 320, damping: 22 },
+    },
+  };
+
   return (
     <section id={sections.skills.id} className="section border-t border-border/60">
       <div className="container-x">
@@ -19,29 +42,37 @@ export function Skills() {
               <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-brand">
                 {category.title}
               </h3>
-              <StaggerGroup className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-                {category.items.map((item) => (
-                  <StaggerItem key={item.name}>
-                    <div
-                      data-cursor="hover"
-                      className="group flex h-full flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-card/50 px-3 py-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-brand/40 hover:bg-card"
-                    >
-                      <span className="grid size-12 place-items-center rounded-xl border border-border bg-background text-foreground transition-colors duration-300 group-hover:border-brand/40 group-hover:text-brand">
-                        {item.Icon ? (
-                          <item.Icon className="size-6" />
-                        ) : (
-                          <span className="font-display text-lg font-semibold tracking-tight">
-                            {item.mono}
-                          </span>
-                        )}
-                      </span>
-                      <span className="text-sm text-muted-foreground transition-colors group-hover:text-foreground">
-                        {item.name}
-                      </span>
-                    </div>
-                  </StaggerItem>
+              <motion.div
+                className="grid grid-cols-2 gap-3 sm:grid-cols-3"
+                variants={container}
+                initial="hidden"
+                whileInView="show"
+                viewport={{ once: true, margin: "-60px" }}
+              >
+                {category.items.map((it) => (
+                  <motion.div
+                    key={it.name}
+                    variants={item}
+                    whileHover={reduce ? undefined : { y: -6, scale: 1.04 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 18 }}
+                    data-cursor="hover"
+                    className="group flex h-full flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-card/50 px-3 py-6 text-center transition-[border-color,background-color,box-shadow] duration-300 hover:border-brand/50 hover:bg-card hover:shadow-[0_14px_44px_-14px_hsl(var(--brand)/0.5)]"
+                  >
+                    <span className="grid size-12 place-items-center rounded-xl border border-border bg-background text-foreground transition-all duration-300 group-hover:scale-110 group-hover:border-brand/50 group-hover:bg-brand/10 group-hover:text-brand">
+                      {it.Icon ? (
+                        <it.Icon className="size-6" />
+                      ) : (
+                        <span className="font-display text-lg font-semibold tracking-tight">
+                          {it.mono}
+                        </span>
+                      )}
+                    </span>
+                    <span className="text-sm text-muted-foreground transition-colors group-hover:text-foreground">
+                      {it.name}
+                    </span>
+                  </motion.div>
                 ))}
-              </StaggerGroup>
+              </motion.div>
             </div>
           ))}
         </div>
