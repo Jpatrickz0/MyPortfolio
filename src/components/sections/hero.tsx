@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { HeroPortrait } from "@/components/site/hero-portrait";
+import { HeroParticles } from "@/components/site/hero-particles";
 import { profile } from "@/content";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -18,7 +18,10 @@ export function Hero() {
   const first = parts.join(" ");
 
   return (
-    <section className="relative flex h-dvh min-h-[640px] items-center justify-center overflow-hidden">
+    <section
+      id="home"
+      className="relative flex h-dvh min-h-[640px] items-center justify-center overflow-hidden"
+    >
       {/* ---- Background ---- */}
       <div
         aria-hidden
@@ -60,9 +63,18 @@ export function Hero() {
         />
       </h1>
 
-      {/* ---- Cutout figure (centered, in FRONT of the name) ---- */}
+      {/* ---- Particle figure (centered, in FRONT of the name) ---- */}
       <div className="absolute inset-x-0 bottom-0 z-10 mx-auto h-[86dvh] w-full max-w-2xl">
-        <HeroPortrait />
+        {/* Soft amber ground glow behind the particle field */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-x-[10%] bottom-0 top-[12%] -z-0 rounded-[40%] blur-3xl"
+          style={{
+            background:
+              "radial-gradient(60% 70% at 50% 45%, hsl(38 92% 58% / 0.20), transparent 70%)",
+          }}
+        />
+        <HeroParticles />
       </div>
 
       {/* ---- Top label ---- */}
@@ -92,13 +104,15 @@ export function Hero() {
           </p>
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
             <Button asChild size="lg">
-              <a href="#contact">
+              <a href="#contact" data-magnetic="0.4">
                 Start a project
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="#work">Explore the archive</a>
+              <a href="#work" data-magnetic="0.4">
+                Explore the archive
+              </a>
             </Button>
           </div>
           <motion.a

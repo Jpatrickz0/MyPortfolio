@@ -4,6 +4,11 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 import { skillCategories, sections } from "@/content";
 import { SectionHeading } from "@/components/site/section-heading";
+import { ToolSphere } from "@/components/site/tool-sphere";
+
+const allTools = Array.from(
+  new Set(skillCategories.flatMap((c) => c.items.map((i) => i.name)))
+);
 
 const container: Variants = {
   hidden: {},
@@ -36,7 +41,10 @@ export function Skills() {
           description="The tools I've picked up across design, development, ecommerce, and marketing."
         />
 
-        <div className="grid gap-10 sm:grid-cols-2">
+        {/* Interactive 3D tool-cloud (desktop; the list below is the fallback) */}
+        <ToolSphere tools={allTools} />
+
+        <div className="mt-6 grid gap-10 sm:grid-cols-2">
           {skillCategories.map((category) => (
             <div key={category.title}>
               <h3 className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-brand">

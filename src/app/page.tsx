@@ -5,6 +5,7 @@ import { Projects } from "@/components/sections/projects";
 import { Skills } from "@/components/sections/skills";
 // import { Testimonials } from "@/components/sections/testimonials"; // hidden — no clients yet
 import { Contact } from "@/components/sections/contact";
+import { DisciplineMarquee } from "@/components/site/discipline-marquee";
 import { profile } from "@/content";
 
 const jsonLd = {
@@ -30,6 +31,8 @@ export default function HomePage() {
       <Experience />
       <Projects />
       <Skills />
+
+      <DisciplineMarquee />
 
       {/* Shared Experiences (testimonials) — HIDDEN for now (no clients yet).
           To show it again, uncomment the next line. */}

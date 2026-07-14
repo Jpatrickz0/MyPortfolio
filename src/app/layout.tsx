@@ -9,6 +9,9 @@ import { Navbar } from "@/components/site/navbar";
 import { Footer } from "@/components/site/footer";
 import { ScrollProgress } from "@/components/site/scroll-progress";
 import { Loader } from "@/components/site/loader";
+import { AmbientBackdrop } from "@/components/site/ambient-backdrop";
+import { MagneticButtons } from "@/components/site/magnetic";
+import { MemoryRail } from "@/components/site/memory-rail";
 import { Enter } from "@/components/site/enter";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -75,7 +78,10 @@ export default function RootLayout({
           Skip to content
         </a>
         <Loader />
+        <AmbientBackdrop />
         <ScrollProgress />
+        <MemoryRail />
+        <MagneticButtons />
         <SmoothScroll>
           <Enter>
             <Navbar />

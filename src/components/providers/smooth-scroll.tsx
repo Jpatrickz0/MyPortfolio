@@ -30,6 +30,19 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
     }
     rafId = requestAnimationFrame(raf);
 
+    // Keep GSAP ScrollTrigger in sync with Lenis so scroll-driven reveals fire
+    // at the right positions under smooth scrolling.
+    let stCleanup = () => {};
+    Promise.all([import("gsap"), import("gsap/ScrollTrigger")]).then(
+      ([{ gsap }, { ScrollTrigger }]) => {
+        gsap.registerPlugin(ScrollTrigger);
+        const update = () => ScrollTrigger.update();
+        lenis.on("scroll", update);
+        ScrollTrigger.refresh();
+        stCleanup = () => lenis.off("scroll", update);
+      }
+    );
+
     // Smooth-scroll same-page anchor links.
     function onClick(e: MouseEvent) {
       const target = (e.target as HTMLElement).closest(
@@ -48,6 +61,7 @@ export function SmoothScroll({ children }: { children: React.ReactNode }) {
 
     return () => {
       cancelAnimationFrame(rafId);
+      stCleanup();
       document.removeEventListener("click", onClick);
       registerLenis(null);
       lenis.destroy();

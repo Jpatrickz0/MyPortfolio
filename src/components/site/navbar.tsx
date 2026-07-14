@@ -64,7 +64,7 @@ export function Navbar() {
 
         <div className="flex items-center gap-2">
           <Button asChild size="sm" className="hidden sm:inline-flex">
-            <Link href="#contact">
+            <Link href="#contact" data-magnetic="0.5">
               Book a call
               <ArrowUpRight className="size-4" />
             </Link>

@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import { Reveal, FocusReveal } from "@/components/motion/reveal";
+import { Reveal } from "@/components/motion/reveal";
+import { SplitReveal } from "@/components/motion/split-reveal";
 
 /**
  * Archival section heading: a "Memory 0X" index tag above the section title,
@@ -36,12 +37,11 @@ export function SectionHeading({
           {index}
         </p>
       </Reveal>
-      <FocusReveal
+      <SplitReveal
         as="h2"
+        text={title}
         className="font-display text-fluid-h2 font-medium leading-[1.02] tracking-tightest"
-      >
-        {title}
-      </FocusReveal>
+      />
       {description && (
         <Reveal delay={0.1}>
           <p
