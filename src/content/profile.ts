@@ -40,6 +40,12 @@ export const profile = {
   // code change needed. (A .jpg works too, but it won't be transparent.)
   portrait: "/images/portrait.png",
 
+  // OPTIONAL animated 2D character. Drop a TRANSPARENT cartoon/illustration PNG
+  // of yourself at this path in /public and it becomes the animated hero figure
+  // (idle float + leans toward the cursor). Until it exists, the hero shows the
+  // particle portrait instead.
+  character: "/images/character.png",
+
   socials: [
     { label: "Instagram", href: "https://instagram.com/" },
     { label: "LinkedIn", href: "https://linkedin.com/" },

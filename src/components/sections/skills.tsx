@@ -4,11 +4,7 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 
 import { skillCategories, sections } from "@/content";
 import { SectionHeading } from "@/components/site/section-heading";
-import { ToolSphere } from "@/components/site/tool-sphere";
-
-const allTools = Array.from(
-  new Set(skillCategories.flatMap((c) => c.items.map((i) => i.name)))
-);
+import { SkillWeb } from "@/components/site/skill-web";
 
 const container: Variants = {
   hidden: {},
@@ -41,8 +37,8 @@ export function Skills() {
           description="The tools I've picked up across design, development, ecommerce, and marketing."
         />
 
-        {/* Interactive 3D tool-cloud (desktop; the list below is the fallback) */}
-        <ToolSphere tools={allTools} />
+        {/* Neural memory web (the categorised list below is the fallback) */}
+        <SkillWeb />
 
         <div className="mt-6 grid gap-10 sm:grid-cols-2">
           {skillCategories.map((category) => (

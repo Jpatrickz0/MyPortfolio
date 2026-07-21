@@ -114,6 +114,10 @@ const config: Config = {
           from: { opacity: "0" },
           to: { opacity: "1" },
         },
+        floaty: {
+          "0%, 100%": { transform: "translateY(0) rotate(-1deg)" },
+          "50%": { transform: "translateY(-12px) rotate(1deg)" },
+        },
         shimmer: {
           "100%": { transform: "translateX(100%)" },
         },
@@ -129,6 +133,7 @@ const config: Config = {
         marquee: "marquee var(--marquee-duration,40s) linear infinite",
         "fade-up": "fade-up 0.7s cubic-bezier(0.22,1,0.36,1) both",
         "page-in": "page-in 0.7s ease-out both",
+        floaty: "floaty 6s ease-in-out infinite",
         "pulse-ring": "pulse-ring 2.4s cubic-bezier(0.4,0,0.6,1) infinite",
       },
     },

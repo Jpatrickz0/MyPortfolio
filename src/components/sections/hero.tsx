@@ -4,7 +4,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight, ArrowDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { HeroParticles } from "@/components/site/hero-particles";
+import { HeroCharacter } from "@/components/site/hero-character";
 import { profile } from "@/content";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -74,7 +74,7 @@ export function Hero() {
               "radial-gradient(60% 70% at 50% 45%, hsl(38 92% 58% / 0.20), transparent 70%)",
           }}
         />
-        <HeroParticles />
+        <HeroCharacter />
       </div>
 
       {/* ---- Top label ---- */}

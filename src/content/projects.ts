@@ -66,8 +66,15 @@ export const projects: Project[] = [
 The design was built with the target audience in mind, focusing on real people looking for real results. It speaks to those who want to feel good about their hair again without feeling overwhelmed by too much info or hype.
 
 The landing page highlights what matters most: it helps make hair look fuller, slows down hair loss, and supports new growth. Everything is laid out clearly so visitors know exactly what they're getting.`,
-    prototypeUrl:
-      "https://www.figma.com/proto/GSItkpa1xGvvOwEoR7ITgQ/SeaNu---Website-Recreate?node-id=1-2&p=f&t=tzMleyffR0nbBZDP-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1",
+    // Full-page landing mockups shown as an Awwwards-style browser-framed gallery.
+    mockups: [
+      "/images/projects/seanu/mockups/00-color-system.webp",
+      "/images/projects/seanu/mockups/07-main-page.jpg",
+      "/images/projects/seanu/mockups/01-nature-secret-weapon.webp",
+      "/images/projects/seanu/mockups/02-savings.webp",
+      "/images/projects/seanu/mockups/03-ultimate-hair.webp",
+      "/images/projects/seanu/mockups/04-losing-hair.webp",
+    ],
   },
   {
     slug: "circumax",
@@ -81,6 +88,8 @@ The landing page highlights what matters most: it helps make hair look fuller, s
     about: `A landing page redesign for CircuMax Gold, a health supplement brand. The goal was a cleaner, more trustworthy page that presents the product clearly and makes it easy for visitors to understand and take action.
 
 I focused on simple structure, clear messaging, and strong visuals — keeping the experience honest and easy to follow from top to bottom.`,
+    // Full-page redesign mockup.
+    mockups: ["/images/projects/circumax/mockups/01-main-page.jpg"],
     prototypeUrl:
       "https://www.figma.com/proto/moLa3YqIuu4fJHsizBD7A7/CircuMax-Gold---Website-Redesign?node-id=0-1&t=vyGeYlhzo6uUh063-1",
   },
@@ -117,6 +126,7 @@ It's fast and local-first: everything works offline with no account, and it send
     about: `GalaPinoy is a landing page made to inspire people to explore the Philippines — its destinations, food, and culture. The goal was a vibrant, welcoming page that makes discovering local spots feel exciting and easy.
 
 The design keeps things clear and visual: bold imagery, simple navigation, and a layout that helps visitors quickly find where to go and what to do next.`,
+    mockups: ["/images/projects/gala-pinoy/mockups/01-landing.webp"],
     prototypeUrl:
       "https://www.figma.com/proto/vlAoWJpylJ3O6VBqm7faOC/Untitled?node-id=0-1&t=iz0ukNtzjHqr5AIA-1",
   },
