@@ -150,6 +150,9 @@ function TimelineNode({
           {job.company && (
             <p className="mt-1 text-sm text-muted-foreground">{job.company}</p>
           )}
+          {job.summary && (
+            <p className="mt-4 text-sm leading-relaxed text-foreground/85">{job.summary}</p>
+          )}
           <ul className="mt-4 space-y-2">
             {job.responsibilities.map((r) => (
               <li

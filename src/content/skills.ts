@@ -21,15 +21,20 @@ import {
   SiPostgresql,
   SiShopify,
   SiGoogleanalytics,
-  SiMeta,
   SiSlack,
   SiGoogle,
+  SiClaude,
+  SiOpenai,
 } from "react-icons/si";
+import { FaCss3Alt } from "react-icons/fa";
+import { CursorIcon } from "@/components/icons/brand-icons";
 
 export type Skill = {
   name: string;
   Icon?: ComponentType<{ className?: string }>;
   mono?: string;
+  /** Single-color logo silhouette in /public, tinted like the icons. */
+  mask?: string;
 };
 
 export type SkillCategory = {
@@ -52,7 +57,7 @@ export const skillCategories: SkillCategory[] = [
     items: [
       { name: "Premiere Pro", mono: "Pr" },
       { name: "After Effects", mono: "Ae" },
-      { name: "CapCut", mono: "Cc" },
+      { name: "CapCut", mask: "/images/logos/capcut-mono.png" },
       { name: "Lightroom", mono: "Lr" },
     ],
   },
@@ -63,7 +68,8 @@ export const skillCategories: SkillCategory[] = [
       { name: "Next.js", Icon: SiNextdotjs },
       { name: "TypeScript", Icon: SiTypescript },
       { name: "Tailwind CSS", Icon: SiTailwindcss },
-      { name: "HTML & CSS", Icon: SiHtml5 },
+      { name: "HTML5", Icon: SiHtml5 },
+      { name: "CSS3", Icon: FaCss3Alt },
       { name: "MySQL", Icon: SiMysql },
       { name: "PostgreSQL", Icon: SiPostgresql },
     ],
@@ -72,10 +78,19 @@ export const skillCategories: SkillCategory[] = [
     title: "Ecommerce & Marketing",
     items: [
       { name: "Shopify", Icon: SiShopify },
-      { name: "Klaviyo", mono: "Kl" },
+      { name: "Klaviyo", mask: "/images/logos/klaviyo-mono.png" },
       { name: "Google Analytics", Icon: SiGoogleanalytics },
-      { name: "Meta Ads", Icon: SiMeta },
       { name: "SEO", Icon: Search },
+    ],
+  },
+  {
+    title: "AI Tools",
+    items: [
+      { name: "HeyGen", mask: "/images/logos/heygen-mono.png" },
+      { name: "Higgsfield", mask: "/images/logos/higgsfield-mono.png" },
+      { name: "Claude", Icon: SiClaude },
+      { name: "ChatGPT", Icon: SiOpenai },
+      { name: "Cursor", Icon: CursorIcon },
     ],
   },
   {

@@ -11,25 +11,32 @@ export type Experience = {
   role: string;
   /** Optional, kept subtle. Remove the line if you'd rather omit it. */
   company?: string;
+  /** Optional one-line overview shown above the bullets. */
+  summary?: string;
   responsibilities: string[];
 };
 
 export const experience: Experience[] = [
   {
-    period: "Apr 2026 — May 2026",
+    period: "Jun 2026 — Jul 2026",
+    role: "AI Automation",
+    company: "IVL Company",
+    summary:
+      "Developed and deployed AI-powered voice automation for order-taking calls using ElevenLabs, Twilio, and Shopify, streamlining the customer ordering workflow for the company.",
+    responsibilities: [
+      "Integrated conversational AI voice agents with Shopify to automate order capture, reducing manual processing and improving order accuracy.",
+      "Configured and maintained Twilio call flows to support scalable, AI-driven customer communication.",
+      "Created AI-generated video content to support company marketing and product promotion initiatives.",
+    ],
+  },
+  {
+    period: "Sep 2025 — May 2026",
     role: "Customer Service Representative",
-    company: "Alorica — DoorDash",
+    company: "Alorica",
     responsibilities: [
       "Supported DoorDash Dashers during live deliveries via phone and chat",
       "Helped with on-the-road issues — merchant closed, unable to locate the customer, and orders already picked up",
       "Guided Dashers through the right next steps and escalated complex cases to keep deliveries moving",
-    ],
-  },
-  {
-    period: "Sep 2025 — Mar 2026",
-    role: "Customer Service Representative",
-    company: "Alorica — Medical Account",
-    responsibilities: [
       "Handled medical-account inquiries — billing, claims, and coverage — with care and accuracy",
       "Followed HIPAA-compliant procedures while keeping support clear and empathetic",
       "Maintained high customer-satisfaction and quality scores",
@@ -46,16 +53,6 @@ export const experience: Experience[] = [
       "Configured web hosting, domains, and SSL for secure, reliable sites",
       "Built and automated Klaviyo email-marketing campaigns",
       "Ran A/B tests on design, content, and CTAs, and partnered with clients on requirements",
-    ],
-  },
-  {
-    period: "Feb 2023 — Mar 2023",
-    role: "Developer",
-    company: "Data Science and Analytics Center",
-    responsibilities: [
-      "Built a library system to organize undergraduate thesis papers across departments",
-      "Designed a simple submission and retrieval flow for staff and students",
-      "Worked closely with users to keep academic records organized and accessible",
     ],
   },
 ];

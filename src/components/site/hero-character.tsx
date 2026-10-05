@@ -66,8 +66,20 @@ export function HeroCharacter() {
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={src}
-          alt={`${profile.name} — illustrated character`}
-          className="h-full w-full animate-floaty object-contain object-bottom [filter:drop-shadow(0_25px_40px_rgba(0,0,0,0.45))]"
+          alt={`${profile.name} — portrait`}
+          className="h-full w-full animate-floaty object-contain object-bottom"
+          style={{
+            // Amber rim light + depth shadow so the cutout sits in the scene.
+            filter:
+              "drop-shadow(0 0 28px hsl(38 92% 58% / 0.28)) drop-shadow(0 25px 40px rgba(0,0,0,0.45)) contrast(1.04)",
+            // Dissolve the hard bottom + shoulder edges into the background.
+            maskImage:
+              "linear-gradient(to bottom, black 50%, transparent 88%), linear-gradient(to right, transparent 4%, black 24%, black 76%, transparent 96%)",
+            maskComposite: "intersect",
+            WebkitMaskImage:
+              "linear-gradient(to bottom, black 50%, transparent 88%), linear-gradient(to right, transparent 4%, black 24%, black 76%, transparent 96%)",
+            WebkitMaskComposite: "source-in",
+          }}
         />
       </div>
     </div>

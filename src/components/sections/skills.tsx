@@ -63,7 +63,23 @@ export function Skills() {
                     className="group flex h-full flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-card/50 px-3 py-6 text-center transition-[border-color,background-color,box-shadow] duration-300 hover:border-brand/50 hover:bg-card hover:shadow-[0_14px_44px_-14px_hsl(var(--brand)/0.5)]"
                   >
                     <span className="grid size-12 place-items-center rounded-xl border border-border bg-background text-foreground transition-all duration-300 group-hover:scale-110 group-hover:border-brand/50 group-hover:bg-brand/10 group-hover:text-brand">
-                      {it.Icon ? (
+                      {it.mask ? (
+                        // Logo silhouette filled with currentColor, like the icon set.
+                        <span
+                          aria-hidden
+                          className="size-6 bg-current"
+                          style={{
+                            maskImage: `url(${it.mask})`,
+                            WebkitMaskImage: `url(${it.mask})`,
+                            maskSize: "contain",
+                            WebkitMaskSize: "contain",
+                            maskRepeat: "no-repeat",
+                            WebkitMaskRepeat: "no-repeat",
+                            maskPosition: "center",
+                            WebkitMaskPosition: "center",
+                          }}
+                        />
+                      ) : it.Icon ? (
                         <it.Icon className="size-6" />
                       ) : (
                         <span className="font-display text-lg font-semibold tracking-tight">

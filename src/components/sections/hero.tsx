@@ -77,6 +77,15 @@ export function Hero() {
         <HeroCharacter />
       </div>
 
+      {/* ---- Outlined echo of the name (in FRONT of the figure) ---- */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-1/2 z-[15] -translate-y-1/2 px-4 text-center font-display font-semibold uppercase leading-[0.82] tracking-tightest text-[clamp(3rem,15vw,13rem)]"
+      >
+        <Line text={first} delay={0.35} reduce={!!reduce} stroke="hsl(var(--foreground) / 0.55)" />
+        <Line text={last} delay={0.5} reduce={!!reduce} stroke="hsl(var(--brand) / 0.75)" />
+      </div>
+
       {/* ---- Top label ---- */}
       <motion.div
         initial={{ opacity: 0, y: 8 }}
@@ -141,16 +150,28 @@ function Line({
   delay,
   reduce,
   className,
+  stroke,
 }: {
   text: string;
   delay: number;
   reduce: boolean;
   className?: string;
+  /** Render as a hollow outline in this color instead of a fill. */
+  stroke?: string;
 }) {
-  if (reduce) return <span className={`block ${className ?? ""}`}>{text}</span>;
+  const style = stroke
+    ? { color: "transparent", WebkitTextStroke: `1.5px ${stroke}` }
+    : undefined;
+  if (reduce)
+    return (
+      <span className={`block ${className ?? ""}`} style={style}>
+        {text}
+      </span>
+    );
   return (
     <span className="block overflow-hidden">
       <motion.span
+        style={style}
         className={`block ${className ?? ""}`}
         initial={{ y: "115%" }}
         animate={{ y: "0%" }}

@@ -18,6 +18,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { profile } from "@/content";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name."),
@@ -41,16 +42,40 @@ export function LeadForm() {
   async function onSubmit(values: FormValues) {
     if (values.website) return; // honeypot tripped
     try {
-      const res = await fetch("/api/lead", {
+      // FormSubmit forwards the submission straight to profile.email (Gmail).
+      // The very first submission triggers a one-time activation email.
+      const res = await fetch(`https://formsubmit.co/ajax/${profile.email}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: values.name,
+          email: values.email,
+          company: values.company || "—",
+          message: values.message,
+          _subject: `New portfolio inquiry from ${values.name}`,
+          _replyto: values.email,
+          _template: "table",
+          _captcha: "false",
+        }),
       });
-      if (!res.ok) throw new Error("Request failed");
+      const result = await res.json().catch(() => ({}));
+      if (!res.ok || String(result.success) !== "true") {
+        const msg: string = result.message || `Request failed (${res.status})`;
+        console.error("Lead form:", res.status, result);
+        // First-ever submission: FormSubmit emails an activation link instead.
+        if (/activat/i.test(msg)) {
+          toast.info("Almost there — check your Gmail and click “Activate Form”, then send again.", {
+            duration: 10000,
+          });
+          return;
+        }
+        throw new Error(msg);
+      }
       setDone(true);
       toast.success("Message sent — I'll be in touch within a day.");
       form.reset();
-    } catch {
+    } catch (err) {
+      console.error("Lead form:", err);
       toast.error("Something went wrong. Email me directly instead.");
     }
   }

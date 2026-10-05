@@ -23,7 +23,6 @@ import { profile } from "@/content";
 
 const BRAND_RGB: [number, number, number] = [0.969, 0.698, 0.243]; // hsl(38 92% 58%)
 const TINT = 0.55; // how far pixel colors are pulled toward brand amber
-const SAMPLE_COLS = 190; // sampling resolution (columns); rows follow aspect
 const ALPHA_CUTOFF = 46; // ignore near-transparent pixels (cutout edges)
 
 type Sampled = {
@@ -290,7 +289,7 @@ export function HeroParticles({
       scene.add(points);
 
       // Entrance: assemble from the scattered cloud.
-      let entranceRaf = 0;
+      const entranceRaf = 0;
       if (!reduce) {
         const { gsap } = await import("gsap");
         if (disposed) return;

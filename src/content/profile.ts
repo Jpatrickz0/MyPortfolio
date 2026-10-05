@@ -44,7 +44,10 @@ export const profile = {
   // of yourself at this path in /public and it becomes the animated hero figure
   // (idle float + leans toward the cursor). Until it exists, the hero shows the
   // particle portrait instead.
-  character: "/images/character.png",
+  character: "/images/portrait.png",
+
+  // Photo shown in the Origins (About) section.
+  aboutPhoto: "/images/about.png",
 
   socials: [
     { label: "Instagram", href: "https://instagram.com/" },
@@ -58,20 +61,17 @@ export const profile = {
 export const about = {
   paragraphs: [
     "Hi, I'm Jan Patrick Ramirez.",
-    "I enjoy creating and improving digital experiences. From building websites and Shopify stores to designing graphics and editing videos, I like turning ideas into something people can see, use, and enjoy.",
-    "I'm always learning, exploring new tools, and finding better ways to create meaningful digital experiences.",
+    "I'm a passionate and adaptable professional who enjoys turning ideas into practical solutions and continuously learning along the way. I'm always looking for opportunities to grow, take on new challenges, and create meaningful work.",
+    "Welcome to my portfolio — a collection of my skills, experience, and projects.",
   ],
-  values: [
-    "Craft over shortcuts",
-    "Outcomes over output",
-    "Detail in every layer",
-    "Build to be remembered",
-  ],
-  // Honest, beginner-friendly facts — versatility, effort, and availability
-  // build trust without overstating experience. Edit freely.
-  quickFacts: [
-    { value: "5", label: "Disciplines combined" },
-    { value: "100%", label: "Effort on every project" },
-    { value: "Open", label: "To new projects" },
+  // "Little things about me" — personal traits shown in Origins. Edit freely.
+  // `icon` is one of: flame, zap, scan, users, compass, shield.
+  traits: [
+    { icon: "flame", title: "Hardworking", note: "I show up and see things through." },
+    { icon: "zap", title: "Fast learner", note: "New tool? Give me a weekend." },
+    { icon: "scan", title: "Detail-oriented", note: "The small stuff is the big stuff." },
+    { icon: "users", title: "Team player", note: "Clear, kind, easy to work with." },
+    { icon: "compass", title: "Curious", note: "Always exploring better ways." },
+    { icon: "shield", title: "Reliable", note: "Deadlines kept, promises kept." },
   ],
 };
